@@ -3,29 +3,13 @@
 // and every other package may only import from packages lower in the stack.
 // New edges require a DECISIONS.md entry (docs/architecture.md §3).
 
-import { readFileSync, readdirSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
 const root = new URL("..", import.meta.url).pathname;
 const pkgRoot = join(root, "packages");
 
-// Layer index: lower number = lower layer. Higher layers may import lower.
-const layers = [
-  "domain", // 0
-  "source", // 1
-  "catalog", // 2
-  "ontology", // 3
-  "knowledge", // 4
-  "curation", // 5
-  "enrichment", // 6
-  "workflows", // 7
-  "models", // 8
-  "graph", // 9
-  "evals", // 10
-  "telemetry", // 11
-  "config", // 12 — config is a leaf: nothing may import it except apps? No:
-  // config holds policies; knowledge/curation read it. Treat as layer 0.5.
-];
+// Layer index kept for documentation; enforcement uses allowedImports below.
 
 const allowedImports = {
   domain: new Set([]),
@@ -36,14 +20,20 @@ const allowedImports = {
   curation: new Set(["domain", "knowledge", "ontology", "config"]),
   enrichment: new Set(["domain", "knowledge", "curation", "config"]),
   workflows: new Set([
-    "domain", "source", "catalog", "ontology", "knowledge",
-    "curation", "enrichment", "models", "config", "telemetry",
+    "domain",
+    "source",
+    "catalog",
+    "ontology",
+    "knowledge",
+    "curation",
+    "enrichment",
+    "models",
+    "config",
+    "telemetry",
   ]),
   models: new Set(["domain", "config", "telemetry"]),
   graph: new Set(["domain", "knowledge", "ontology", "config"]),
-  evals: new Set([
-    "domain", "knowledge", "curation", "models", "config", "telemetry",
-  ]),
+  evals: new Set(["domain", "knowledge", "curation", "models", "config", "telemetry"]),
   telemetry: new Set([]),
   config: new Set([]),
 };

@@ -4,6 +4,15 @@
   "private": true,
   "description": "Canonical filesystem repositories",
   "type": "module",
-  "exports": { ".": "./src/index.ts" },
-  "scripts": { "typecheck": "tsc --noEmit" }
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@kiln/config": "workspace:*",
+    "@kiln/domain": "workspace:*",
+    "zod": "catalog:"
+  }
 }

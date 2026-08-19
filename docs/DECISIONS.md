@@ -4,6 +4,14 @@ Durable architecture decisions, newest first. Format: **[D-<n>] date — decisio
 
 ## Phase 0
 
+**[D-11] 2026-08-19 — Next.js 16.3, `output: "export"`, `generateStaticParams` from generated/** JSON.** Per research findings §4.
+
+**[D-10] 2026-08-19 — MiniSearch 7.x for static search.** FlexSearch is effectively frozen (0.8.212, no real maintenance since 2023). Findings §3.
+
+**[D-9] 2026-08-19 — Graphology 0.26 (data/algorithms) + Sigma.js 3.0 (render) for the graph explorer.** Sigma v3 is Graphology-agnostic WebGL/canvas; Cytoscape is the contingency. Graph route loads it via dynamic import, client-only. Findings §2.
+
+**[D-8] 2026-08-19 — Eve pinned at ^0.27.7, boundary = packages/workflows only.** Suitable as orchestration runtime (agents/skills/tools/evals surface verified from installed package), but carries heavy server deps (libsql, drizzle) — never import its channels/auth/schedules; canonical state never routes through Eve. Final go/no-go at Phase 4 spike; fallback is a hand-rolled stage runner with the same agent contract. Findings §1.
+
 **[D-7] 2026-08-19 — Repo: rmax-ai/kiln, public, MIT.** Showcase project; matches org convention.
 
 **[D-6] 2026-08-19 — ID scheme: `{kind}:{slug}`, ULID for events, deterministic assertion/evidence slugs.** Explicit IDs are a spec invariant (SPEC §2.2); deterministic slugs make re-derivation idempotent and diffs stable.

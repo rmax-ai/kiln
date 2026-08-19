@@ -4,6 +4,14 @@
   "private": true,
   "description": "Task policies, thresholds",
   "type": "module",
-  "exports": { ".": "./src/index.ts" },
-  "scripts": { "typecheck": "tsc --noEmit" }
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@kiln/domain": "workspace:*",
+    "zod": "catalog:"
+  }
 }

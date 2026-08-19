@@ -4,6 +4,16 @@
   "private": true,
   "description": "kb CLI",
   "type": "module",
-  "bin": { "kb": "./src/cli.ts" },
-  "scripts": { "typecheck": "tsc --noEmit", "build": "tsc -p tsconfig.json" }
+  "bin": {
+    "kb": "./src/cli.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@kiln/domain": "workspace:*",
+    "@kiln/knowledge": "workspace:*",
+    "@kiln/source": "workspace:*"
+  }
 }

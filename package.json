@@ -14,13 +14,27 @@
     "typecheck": "pnpm -r typecheck",
     "test": "vitest run",
     "test:watch": "vitest",
-    "kb": "pnpm --filter @kiln/cli exec kiln",
+    "kb": "tsx apps/cli/src/cli.ts",
     "build": "pnpm --filter @kiln/cli build"
   },
   "devDependencies": {
-    "typescript": "catalog:",
-    "vitest": "catalog:",
     "@biomejs/biome": "catalog:",
-    "@types/node": "catalog:"
+    "@kiln/catalog": "workspace:*",
+    "@kiln/config": "workspace:*",
+    "@kiln/curation": "workspace:*",
+    "@kiln/domain": "workspace:*",
+    "@kiln/enrichment": "workspace:*",
+    "@kiln/evals": "workspace:*",
+    "@kiln/graph": "workspace:*",
+    "@kiln/knowledge": "workspace:*",
+    "@kiln/models": "workspace:*",
+    "@kiln/ontology": "workspace:*",
+    "@kiln/source": "workspace:*",
+    "@kiln/telemetry": "workspace:*",
+    "@kiln/workflows": "workspace:*",
+    "@types/node": "catalog:",
+    "tsx": "^4.23.12",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   }
 }
