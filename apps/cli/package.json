@@ -1,0 +1,9 @@
+{
+  "name": "@kiln/cli",
+  "version": "0.1.0",
+  "private": true,
+  "description": "kb CLI",
+  "type": "module",
+  "bin": { "kb": "./src/cli.ts" },
+  "scripts": { "typecheck": "tsc --noEmit", "build": "tsc -p tsconfig.json" }
+}

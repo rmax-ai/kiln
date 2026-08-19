@@ -1,0 +1,9 @@
+{
+  "name": "@kiln/curation",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Decisions, rules, proposals, ChangeSets",
+  "type": "module",
+  "exports": { ".": "./src/index.ts" },
+  "scripts": { "typecheck": "tsc --noEmit" }
+}

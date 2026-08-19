@@ -1,0 +1,26 @@
+{
+  "name": "kiln",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Filesystem-first, evidence-backed knowledge compiler and curator",
+  "license": "MIT",
+  "packageManager": "pnpm@10.12.1",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "lint": "biome check . && node scripts/check-boundaries.mjs",
+    "format": "biome format --write .",
+    "typecheck": "pnpm -r typecheck",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "kb": "pnpm --filter @kiln/cli exec kiln",
+    "build": "pnpm --filter @kiln/cli build"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "vitest": "catalog:",
+    "@biomejs/biome": "catalog:",
+    "@types/node": "catalog:"
+  }
+}

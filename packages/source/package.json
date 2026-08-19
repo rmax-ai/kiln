@@ -1,0 +1,9 @@
+{
+  "name": "@kiln/source",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Source adapters: Markdown -> SourceDocument",
+  "type": "module",
+  "exports": { ".": "./src/index.ts" },
+  "scripts": { "typecheck": "tsc --noEmit" }
+}

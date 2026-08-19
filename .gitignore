@@ -1,0 +1,23 @@
+node_modules/
+dist/
+build/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+
+# generated artifacts are disposable — never commit
+generated/
+
+# runtime data
+telemetry/runs/
+catalog/*.jsonl
+
+# secrets
+.env
+.env.*
+!.env.example
+
+# misc
+.DS_Store
+*.log

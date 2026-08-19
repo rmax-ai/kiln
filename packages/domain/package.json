@@ -1,0 +1,9 @@
+{
+  "name": "@kiln/domain",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Types, IDs, Zod schemas — imports nothing",
+  "type": "module",
+  "exports": { ".": "./src/index.ts" },
+  "scripts": { "typecheck": "tsc --noEmit" }
+}

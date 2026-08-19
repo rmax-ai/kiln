@@ -1,0 +1,9 @@
+{
+  "name": "@kiln/enrichment",
+  "version": "0.1.0",
+  "private": true,
+  "description": "EnrichmentRequest + gap detection",
+  "type": "module",
+  "exports": { ".": "./src/index.ts" },
+  "scripts": { "typecheck": "tsc --noEmit" }
+}
