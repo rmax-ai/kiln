@@ -3,8 +3,7 @@
 // and every other package may only import from packages lower in the stack.
 // New edges require a DECISIONS.md entry (docs/architecture.md §3).
 
-import { readFileSync } from "node:fs";
-import { readdirSync } from "node:fs/promises";
+import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 const root = new URL("..", import.meta.url).pathname;

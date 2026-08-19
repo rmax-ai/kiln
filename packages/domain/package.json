@@ -4,6 +4,13 @@
   "private": true,
   "description": "Types, IDs, Zod schemas — imports nothing",
   "type": "module",
-  "exports": { ".": "./src/index.ts" },
-  "scripts": { "typecheck": "tsc --noEmit" }
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "zod": "catalog:"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  }
 }
