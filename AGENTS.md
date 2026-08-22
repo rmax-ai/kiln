@@ -51,4 +51,4 @@ pnpm lint && pnpm typecheck && pnpm test
 
 ## Current phase focus
 
-Phase 2 (catalog, story 4.2) complete: deterministic LLM-free extraction + JSONL writer + `kb catalog`. Next: curation model (story 4.3). Do NOT implement agents (Phase 4), enrichment (Phase 5), graph compiler (Phase 6), website (Phase 7), evals (Phase 8), or showcase (Phase 9) yet — they have their own phases and their stubs already exist.
+Stories 4.2 (catalog), 4.3 (curation model), 4.4 (agentic curation via stage runner, D-13) complete. Next: story 4.5 (enrichment). Do NOT implement graph compiler (Phase 6), website (Phase 7), evals (Phase 8), or showcase (Phase 9) yet — they have their own phases and their stubs already exist.
