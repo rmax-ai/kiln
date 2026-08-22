@@ -1,6 +1,7 @@
 export * from "./errors.js";
 export * from "./ids.js";
 export * from "./schemas/assertion.js";
+export * from "./schemas/candidates.js";
 export * from "./schemas/changeset.js";
 export * from "./schemas/common.js";
 export * from "./schemas/decision.js";

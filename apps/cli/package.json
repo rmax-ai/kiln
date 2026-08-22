@@ -12,6 +12,7 @@
     "build": "tsc -p tsconfig.json"
   },
   "dependencies": {
+    "@kiln/catalog": "workspace:*",
     "@kiln/domain": "workspace:*",
     "@kiln/knowledge": "workspace:*",
     "@kiln/source": "workspace:*"

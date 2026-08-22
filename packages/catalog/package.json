@@ -9,5 +9,11 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@kiln/domain": "workspace:*"
+  },
+  "devDependencies": {
+    "@kiln/source": "workspace:*"
   }
 }
