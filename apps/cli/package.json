@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@kiln/catalog": "workspace:*",
+    "@kiln/curation": "workspace:*",
     "@kiln/domain": "workspace:*",
     "@kiln/knowledge": "workspace:*",
     "@kiln/source": "workspace:*"

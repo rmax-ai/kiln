@@ -76,6 +76,8 @@ export const proposalStore = (root: string) =>
   });
 
 export class KnowledgeBase {
+  readonly knowledgeRoot: string;
+  readonly curationRoot: string;
   readonly entities: RecordRepo<Entity>;
   readonly assertions: RecordRepo<Assertion>;
   readonly evidence: RecordRepo<Evidence>;
@@ -84,16 +86,16 @@ export class KnowledgeBase {
   readonly rules: RecordRepo<Rule>;
   readonly proposals: RecordRepo<Proposal>;
   constructor(root: string) {
-    const knowledgeRoot = basename(root) === "knowledge" ? root : join(root, "knowledge");
-    const curationRoot =
+    this.knowledgeRoot = basename(root) === "knowledge" ? root : join(root, "knowledge");
+    this.curationRoot =
       basename(root) === "knowledge" ? join(dirname(root), "curation") : join(root, "curation");
-    this.entities = entityStore(knowledgeRoot);
-    this.assertions = assertionStore(knowledgeRoot);
-    this.evidence = evidenceStore(knowledgeRoot);
-    this.resources = resourceStore(knowledgeRoot);
-    this.decisions = decisionStore(curationRoot);
-    this.rules = ruleStore(curationRoot);
-    this.proposals = proposalStore(curationRoot);
+    this.entities = entityStore(this.knowledgeRoot);
+    this.assertions = assertionStore(this.knowledgeRoot);
+    this.evidence = evidenceStore(this.knowledgeRoot);
+    this.resources = resourceStore(this.knowledgeRoot);
+    this.decisions = decisionStore(this.curationRoot);
+    this.rules = ruleStore(this.curationRoot);
+    this.proposals = proposalStore(this.curationRoot);
   }
   async loadAll(): Promise<{
     entities: Entity[];

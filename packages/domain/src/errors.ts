@@ -5,7 +5,8 @@ export type KilnErrorCode =
   | "CONFLICT"
   | "REFERENCE_ERROR"
   | "IMMUTABLE"
-  | "PRECEDENCE_VIOLATION";
+  | "PRECEDENCE_VIOLATION"
+  | "VALIDATION_ERROR";
 
 export class KilnError extends Error {
   readonly code: KilnErrorCode;

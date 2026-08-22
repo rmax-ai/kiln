@@ -15,6 +15,7 @@ export const DecisionOperationSchema = z.enum([
   "REJECT_RELATIONSHIP",
   "ACCEPT_ONTOLOGY_CHANGE",
   "REJECT_ONTOLOGY_CHANGE",
+  "ROLLBACK",
 ]);
 export type DecisionOperation = z.infer<typeof DecisionOperationSchema>;
 export const DecisionSchema = DurableBaseSchema.safeExtend({

@@ -83,6 +83,12 @@ importers:
 
   apps/cli:
     dependencies:
+      '@kiln/catalog':
+        specifier: workspace:*
+        version: link:../../packages/catalog
+      '@kiln/curation':
+        specifier: workspace:*
+        version: link:../../packages/curation
       '@kiln/domain':
         specifier: workspace:*
         version: link:../../packages/domain
@@ -95,7 +101,15 @@ importers:
 
   apps/explorer: {}
 
-  packages/catalog: {}
+  packages/catalog:
+    dependencies:
+      '@kiln/domain':
+        specifier: workspace:*
+        version: link:../domain
+    devDependencies:
+      '@kiln/source':
+        specifier: workspace:*
+        version: link:../source
 
   packages/config:
     dependencies:
@@ -106,7 +120,17 @@ importers:
         specifier: 'catalog:'
         version: 4.4.3
 
-  packages/curation: {}
+  packages/curation:
+    dependencies:
+      '@kiln/config':
+        specifier: workspace:*
+        version: link:../config
+      '@kiln/domain':
+        specifier: workspace:*
+        version: link:../domain
+      '@kiln/knowledge':
+        specifier: workspace:*
+        version: link:../knowledge
 
   packages/domain:
     dependencies:

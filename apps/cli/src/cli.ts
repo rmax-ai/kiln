@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import {
   type CatalogExtraction,
@@ -6,12 +7,13 @@ import {
   extractCatalog,
   writeCatalog,
 } from "@kiln/catalog";
+import { applyChangeSet, evaluateChangeSet, previewChangeSet } from "@kiln/curation";
 import { KilnError } from "@kiln/domain";
 import { KnowledgeBase } from "@kiln/knowledge";
 import { YouTubeInsightsMarkdownAdapter } from "@kiln/source";
 
 const usage =
-  "Usage: kb <ingest <path> | catalog <path> | validate>\n\nCommands:\n  ingest <path>   Parse YouTube insights Markdown\n  catalog <path>  Extract deterministic catalog records\n  validate        Validate knowledge and curation records";
+  "Usage: kb <ingest <path> | catalog <path> | apply <changeset.json> [--dry-run] | validate>\n\nCommands:\n  ingest <path>   Parse YouTube insights Markdown\n  catalog <path>  Extract deterministic catalog records\n  apply <path>    Apply a ChangeSet (or preview with --dry-run)\n  validate        Validate knowledge and curation records";
 function exitFor(error: unknown): number {
   if (error instanceof KilnError && error.code === "CONFLICT") return 4;
   return 1;
@@ -99,6 +101,46 @@ export async function main(argv: string[]): Promise<number> {
       return exitFor(error);
     }
     return failed ? 1 : 0;
+  }
+  if (command === "apply") {
+    if (!argument || (argv.length !== 2 && (argv.length !== 3 || argv[2] !== "--dry-run"))) {
+      console.error(usage);
+      return 2;
+    }
+    try {
+      const changeSet = JSON.parse(await readFile(argument, "utf8"));
+      const kb = new KnowledgeBase(process.cwd());
+      const evaluation = await evaluateChangeSet(kb, changeSet);
+      if (argv[2] === "--dry-run") {
+        for (const line of previewChangeSet(changeSet)) console.log(line);
+        console.log(`verdict: ${evaluation.verdict}`);
+        for (const conflict of evaluation.conflicts) console.log(`conflict: ${conflict.message}`);
+        return 0;
+      }
+      if (evaluation.verdict === "require_review" && changeSet.status !== "accepted") {
+        console.error(`ChangeSet requires review: ${evaluation.reasons.join("; ")}`);
+        return 4;
+      }
+      const result = await applyChangeSet(kb, changeSet, { autoAccept: true });
+      if (!result.ok) {
+        console.error(result.error.message);
+        return exitFor(result.error);
+      }
+      if (result.value.alreadyApplied) console.log("already applied");
+      else
+        console.log(
+          `applied ${
+            changeSet.entityChanges.length +
+            changeSet.assertionChanges.length +
+            changeSet.ruleChanges.length +
+            changeSet.ontologyChanges.length
+          } changes`,
+        );
+      return 0;
+    } catch (error) {
+      console.error(error instanceof Error ? error.message : String(error));
+      return exitFor(error);
+    }
   }
   if (command === "validate") {
     if (argv.length !== 1) {

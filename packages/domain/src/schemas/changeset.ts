@@ -10,6 +10,7 @@ export const ChangeStatusSchema = z.enum([
   "accepted",
   "rejected",
   "applied",
+  "rolled_back",
 ]);
 export type ChangeStatus = z.infer<typeof ChangeStatusSchema>;
 export const EntityChangeSchema = z
