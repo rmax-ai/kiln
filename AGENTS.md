@@ -51,4 +51,4 @@ pnpm lint && pnpm typecheck && pnpm test
 
 ## Current phase focus
 
-Phase 1 (domain foundation) only: monorepo bootstrap, domain schemas, IDs, fs repositories, YouTube adapter, fixture, separation tests. Do NOT implement agents, enrichment, models, graph compiler, or the website yet — they have their own phases and their stubs already exist.
+Phase 2 (catalog, story 4.2) complete: deterministic LLM-free extraction + JSONL writer + `kb catalog`. Next: curation model (story 4.3). Do NOT implement agents (Phase 4), enrichment (Phase 5), graph compiler (Phase 6), website (Phase 7), evals (Phase 8), or showcase (Phase 9) yet — they have their own phases and their stubs already exist.
