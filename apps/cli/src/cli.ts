@@ -10,10 +10,21 @@ import {
 import { applyChangeSet, evaluateChangeSet, previewChangeSet } from "@kiln/curation";
 import { KilnError } from "@kiln/domain";
 import { KnowledgeBase } from "@kiln/knowledge";
+import { MockLanguageModel } from "@kiln/models";
 import { YouTubeInsightsMarkdownAdapter } from "@kiln/source";
+import {
+  type AgentDefinition,
+  assertionProposerAgent,
+  entityResolverAgent,
+  knowledgeReconcilerAgent,
+  makeProposal,
+  ontologyMapperAgent,
+  runAgent,
+  writeProposal,
+} from "@kiln/workflows";
 
 const usage =
-  "Usage: kb <ingest <path> | catalog <path> | apply <changeset.json> [--dry-run] | validate>\n\nCommands:\n  ingest <path>   Parse YouTube insights Markdown\n  catalog <path>  Extract deterministic catalog records\n  apply <path>    Apply a ChangeSet (or preview with --dry-run)\n  validate        Validate knowledge and curation records";
+  "Usage: kb <ingest <path> | catalog <path> | apply <changeset.json> [--dry-run] | propose <agent> <input.json> | validate>\n\nCommands:\n  ingest <path>   Parse YouTube insights Markdown\n  catalog <path>  Extract deterministic catalog records\n  apply <path>    Apply a ChangeSet (or preview with --dry-run)\n  propose <agent> <input.json>  Run an agent stage (mock model)\n  validate        Validate knowledge and curation records";
 function exitFor(error: unknown): number {
   if (error instanceof KilnError && error.code === "CONFLICT") return 4;
   return 1;
@@ -136,6 +147,58 @@ export async function main(argv: string[]): Promise<number> {
             changeSet.ontologyChanges.length
           } changes`,
         );
+      return 0;
+    } catch (error) {
+      console.error(error instanceof Error ? error.message : String(error));
+      return exitFor(error);
+    }
+  }
+  if (command === "propose") {
+    const inputPath = argv[2];
+    if (!argument || !inputPath || argv.length !== 3) {
+      console.error(usage);
+      return 2;
+    }
+    const agents = {
+      "entity-resolver": entityResolverAgent,
+      "ontology-mapper": ontologyMapperAgent,
+      "assertion-proposer": assertionProposerAgent,
+      "knowledge-reconciler": knowledgeReconcilerAgent,
+    };
+    const definition = Object.hasOwn(agents, argument)
+      ? agents[argument as keyof typeof agents]
+      : undefined;
+    if (!definition) {
+      console.error(`unknown agent ${argument}`);
+      return 2;
+    }
+    const kinds = {
+      "entity-resolver": "entity_resolution",
+      "ontology-mapper": "ontology_change",
+      "assertion-proposer": "new_assertion",
+      "knowledge-reconciler": "change_set",
+    } as const;
+    try {
+      const [input, fixture] = await Promise.all([
+        readFile(inputPath, "utf8").then(JSON.parse),
+        readFile(join(process.cwd(), "fixtures", "agents", `${argument}.json`), "utf8").then(
+          JSON.parse,
+        ),
+      ]);
+      const output = await runAgent(
+        new MockLanguageModel({ [definition.task]: fixture }),
+        definition as unknown as AgentDefinition<unknown, unknown>,
+        input,
+      );
+      const proposal = makeProposal(
+        kinds[argument as keyof typeof kinds],
+        `${argument} proposal`,
+        output.value,
+        `Agent ${argument} run via kb propose`,
+        { type: "agent", workflow: "kb-propose", model: "mock" },
+      );
+      await writeProposal(new KnowledgeBase(process.cwd()), proposal);
+      console.log(`wrote ${proposal.id} (pending)`);
       return 0;
     } catch (error) {
       console.error(error instanceof Error ? error.message : String(error));

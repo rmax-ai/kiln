@@ -1,0 +1,12 @@
+{
+  "resolutions": [
+    {
+      "candidateId": "candidate:agent-harness",
+      "action": "create_new",
+      "label": "Agent Harness",
+      "aliases": ["harness"],
+      "confidence": 0.8,
+      "reasoning": "The candidate has no near-exact existing alias."
+    }
+  ]
+}

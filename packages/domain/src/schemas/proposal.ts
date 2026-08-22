@@ -10,6 +10,9 @@ export const ProposalKindSchema = z.enum([
   "ontology_change",
   "definition_change",
   "curation_rule_change",
+  "new_entity",
+  "entity_resolution",
+  "change_set",
 ]);
 export type ProposalKind = z.infer<typeof ProposalKindSchema>;
 

@@ -1,0 +1,10 @@
+{
+  "mappings": [
+    {
+      "candidateId": "candidate:agent-harness",
+      "entityType": "system",
+      "confidence": 0.8,
+      "reasoning": "The candidate describes a runnable harness."
+    }
+  ]
+}

@@ -95,9 +95,15 @@ importers:
       '@kiln/knowledge':
         specifier: workspace:*
         version: link:../../packages/knowledge
+      '@kiln/models':
+        specifier: workspace:*
+        version: link:../../packages/models
       '@kiln/source':
         specifier: workspace:*
         version: link:../../packages/source
+      '@kiln/workflows':
+        specifier: workspace:*
+        version: link:../../packages/workflows
 
   apps/explorer: {}
 
@@ -156,7 +162,11 @@ importers:
         specifier: 'catalog:'
         version: 4.4.3
 
-  packages/models: {}
+  packages/models:
+    dependencies:
+      zod:
+        specifier: 'catalog:'
+        version: 4.4.3
 
   packages/ontology: {}
 
@@ -171,7 +181,23 @@ importers:
 
   packages/telemetry: {}
 
-  packages/workflows: {}
+  packages/workflows:
+    dependencies:
+      '@kiln/config':
+        specifier: workspace:*
+        version: link:../config
+      '@kiln/domain':
+        specifier: workspace:*
+        version: link:../domain
+      '@kiln/knowledge':
+        specifier: workspace:*
+        version: link:../knowledge
+      '@kiln/models':
+        specifier: workspace:*
+        version: link:../models
+      zod:
+        specifier: 'catalog:'
+        version: 4.4.3
 
 packages:
 

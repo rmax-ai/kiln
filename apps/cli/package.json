@@ -16,6 +16,8 @@
     "@kiln/curation": "workspace:*",
     "@kiln/domain": "workspace:*",
     "@kiln/knowledge": "workspace:*",
-    "@kiln/source": "workspace:*"
+    "@kiln/models": "workspace:*",
+    "@kiln/source": "workspace:*",
+    "@kiln/workflows": "workspace:*"
   }
 }

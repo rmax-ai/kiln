@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "changeset:agent-harness",
+  "createdAt": "2026-01-01T00:00:00.000Z",
+  "updatedAt": "2026-01-01T00:00:00.000Z",
+  "entityChanges": [
+    {
+      "op": "create",
+      "entityId": "concept:agent-harness",
+      "entity": {
+        "schemaVersion": 1,
+        "id": "concept:agent-harness",
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z",
+        "type": "concept",
+        "label": "Agent Harness",
+        "aliases": ["agent-harness"],
+        "evidence": [],
+        "provenance": {
+          "createdBy": { "type": "agent", "workflow": "kb-propose", "model": "mock" }
+        }
+      }
+    }
+  ],
+  "assertionChanges": [],
+  "ontologyChanges": [],
+  "ruleChanges": [],
+  "evidence": [],
+  "createdBy": { "type": "agent", "workflow": "kb-propose", "model": "mock" },
+  "status": "proposed"
+}

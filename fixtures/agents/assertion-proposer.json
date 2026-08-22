@@ -1,0 +1,12 @@
+{
+  "assertions": [
+    {
+      "subjectText": "Agent Harness",
+      "predicate": "relates_to",
+      "objectText": "stage runner",
+      "confidence": 0.8,
+      "reasoning": "The candidate directly names the relationship.",
+      "evidenceRefs": []
+    }
+  ]
+}
